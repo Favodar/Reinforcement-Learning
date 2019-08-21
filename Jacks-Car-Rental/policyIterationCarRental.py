@@ -196,16 +196,6 @@ print("Reshaped Policy (-5 = move 5 cars from B to A, 0 = move no cars, 5 = move
 print(np.reshape(np.argmax(policy, axis=1)-5, env.shape))
 print("")
 
-
-
-print("Visualized Policy:")
-#print("(not implemented)")
-list1 = []
-for number in np.argmax(policy, axis=1):    
-    list1.append(visualize(number-5))
-print(str(np.reshape(list1, env.shape)).replace("'", ""))
-print("")
-
 print("visualizePretty:")
 visualizePretty(np.reshape(np.argmax(policy, axis=1)-5, env.shape), "policy")
 
@@ -222,13 +212,6 @@ for number in v:
 print(str(np.reshape(list3, env.shape)).replace("'", ""))
 print("")
 
-print("Visualized Value Function:")
-list2 = []
-for number in v:    
-    list2.append(visualize(number))
-#print("(not implemented)")
-print(str(np.reshape(list2, env.shape)).replace("'", ""))
-print("")
 
 print("visualizePretty:")
 visualizePretty(np.reshape(v, env.shape), "value function")
