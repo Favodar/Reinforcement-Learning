@@ -19,7 +19,7 @@ import numpy as np
 # possible rewards - via the "env"-function.
 # =============================================================================
 
-maxCars = 8
+maxCars = 6
 # nrOfStates is the number of values that c1 or c2 can have, which is one more than maxCars because the value can be zero.
 nrOfStates = maxCars+1
 
