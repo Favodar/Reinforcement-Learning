@@ -1,0 +1,476 @@
+html, body {
+    height: 100%;
+    
+    font: 400 1.2em/1.8 "Lato", sans-serif;
+    color: #777;
+    text-align: justify;
+
+    
+    
+    
+}
+
+body
+{
+  overflow-x: hidden;
+}
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+ .stage, ul, .wrapper, .scene, .clearfix, li {
+/*         background-image: url("http://innovationatwork.ieee.org/wp-content/uploads/2018/04/bigstock-Artificial-intelligence-modern-207054388.jpg");
+
+    /* Create the parallax scrolling effect
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover; */
+}
+
+
+
+@media not screen and (pointer)
+{
+
+    .parallax_text{
+        font-style: italic;
+    }
+    body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    background-image: url("../pictures/unfree/bigstock-Artificial-intelligence-modern-207054388.jpg");
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
+.container {
+    display: flex;
+}
+
+.overlay {
+    position: fixed;
+
+    overflow: auto;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    
+
+    color: #777;
+    background-color: rgb(255, 255, 255);
+    /* background-image: url("../pictures/stockphotos/vaun0815-1383009-unsplash.jpg"); */
+    
+    
+    text-align:justify;
+    padding:50px 80px;
+    width: 90%;
+    height: 90%;
+
+    top: 5%;
+    left: 5%;
+    margin-top: auto; /* Negative half of height. */
+    margin-left: auto;
+
+    /* outline: 2em solid rgba(139, 137, 255, 0.685); */
+    border-radius: 2em;
+
+    box-shadow: 0px 0px 100px 10px #000;
+  
+    
+    
+
+
+    z-index: 10;
+}
+
+#overlay0
+{
+  background:linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9)), url("../pictures/stockphotos/vaun0815-1383009-unsplash.jpg");
+
+  background-position: center; 
+}
+
+.repeating-linear-gradient
+{
+  background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0.075) 10%, rgba(255, 255, 255, 0.075) 14%, rgba(255, 255, 255, 0.15) 14%, rgba(255, 255, 255, 0.15) 15%, rgba(255, 255, 255, 0.075) 17%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.075) 40%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0) 43%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.075) 60%, rgba(255, 255, 255, 0.075) 66%, rgba(255, 255, 255, 0.15) 66%, rgba(255, 255, 255, 0.075) 70%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%), radial-gradient(ellipse farthest-corner, transparent, rgba(0, 0, 0, 0.2) 110%);
+
+}
+
+.parallax, .parallax-1, .parallax-2, .parallax-3 {
+     
+    
+
+    /* Set a specific height */
+    height: 30em; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+/*     position: fixed;
+    content: ' ';
+    display: block;
+    width: 100vw;
+    min-height: 100vh;  
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-position: center;
+    background-size: cover;
+    z-index: -10;  */
+    
+    color: #777;
+    /* background-color:white; */
+    text-align:center;
+    padding:50px 80px;
+    text-align: justify;
+
+}
+
+.parallax { 
+
+   /* The image used */
+   background-image: url("../pictures/unfree/bigstock-Artificial-intelligence-modern-207054388.jpg");
+    
+  }
+
+.parallax-1
+{
+    background-image: url("../pictures/stockphotos/AdobeStock_96115522.jpg");  
+}
+.parallax-2
+{ 
+
+   /* The image used */
+    background-image: url("../pictures/stockphotos/franck-v-795970-unsplash.jpg");
+}
+.parallax-3 { 
+
+   /* The image used */
+    background-image: url("../pictures/stockphotos/franck-v-517860-unsplash.jpg");
+}
+
+.parallax-4 { 
+
+  /* The image used */
+   background-image: url("../pictures/stockphotos/");
+}
+
+.parallax_small { 
+    /* The image used */
+    background-image: url("../pictures/stockphotos/AdobeStock_96115522.jpeg");
+
+    /* Set a specific height */
+    height: 10em; 
+
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #777;
+    /* background-color:white; */
+    text-align:center;
+  /*   padding:50px 80px; */
+    text-align: justify;
+
+}
+
+.fixed_background {
+  height: 50em;
+}
+
+.fixed_background_half {
+  height: 25em;
+
+}
+
+.fixed_background_double {
+  height: 100em;
+}
+
+.parallax-mirror {
+  visibility: visible !important;
+}
+
+.text_fade {
+
+    animation-name: appear;
+    animation-duration: 4s;
+    
+    
+
+}
+.parallax_text {
+    color: rgb(103, 102, 129);
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+    text-align:justify;
+    padding:4em 5em;
+    width: 100%;
+
+
+
+    transform: scale(1);
+
+    transition: opacity 0.5s;
+  
+    transition: color 0.5s;
+    
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0);
+    transition: box-shadow 0.8s;
+    transition: transform 1s;
+  
+
+    
+
+    z-index: 1;
+
+/*     margin-bottom: 50%;
+
+    position: relative;
+    float: left; */
+
+/*    animation-name: appear;
+    animation-duration: 10s;
+    animation-delay 4s; */
+    
+    
+
+
+}
+
+@keyframes appear {
+    from {color: white;}
+    to {color: #777;}
+}
+
+.parallax_text:hover {
+    
+
+    
+
+/*     transition: color 0.5s;
+    color: rgb(63, 63, 63); */
+
+    transition: box-shadow 0.2s;
+
+    box-shadow: 0px 0px 10px 5px rgba(255, 255, 255, 0.781);
+
+    transition: transform 1s;
+    /* width: 105%; */
+    transform: scale(1.03);
+    
+
+}
+
+.slide_test {
+
+}
+
+
+.come-in {
+    transform: translateY(500px);
+    animation: come-in 1.8s ease forwards;
+  }
+  .come-in:nth-child(odd) {
+    animation-duration: 1.6s;
+  }
+  .already-visible {
+    /* transform: translateY(0);
+    animation: none; */
+  }
+  
+  @keyframes come-in {
+    to { transform: translateY(0); }
+  }
+
+
+.reference {
+  font-size: 0.6em;
+}
+
+a {
+    color: inherit;
+}
+
+h3 {
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font: 2em "Lato", sans-serif;
+  color: #111;
+    text-align: center;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("img_parallax.jpg");
+  min-height: 100%;
+}
+
+.bgimg-2 {
+  background-image: url("img_parallax2.jpg");
+  min-height: 400px;
+}
+
+.bgimg-3 {
+  background-image: url("img_parallax3.jpg");
+  min-height: 400px;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+input[type=checkbox] {
+  position: absolute;
+  left: -9999px;
+}
+
+
+
+/* Default State */
+input[type=checkbox] + label {
+
+}
+
+/* Toggled State */
+input[type=checkbox]:checked + label {
+  background: rgba(144, 238, 144, 0.8);
+  box-shadow: 0px 0px 5px 3px rgba(144, 238, 144, 0.8);
+}
+
+fieldset > label
+{
+  font-size: 0.8em;
+}
+
+.checkanswer
+{
+  font-size: 1em;
+  border: lightgrey;
+  border-style: solid;
+  padding: 0.3em;
+  background-color: #777;
+  color: lightgrey;
+}
+
+.checkanswer:hover
+{
+  border-color: grey;
+  background-color: rgb(73, 73, 73);
+  color: rgb(169, 215, 252);
+  
+}
+
+fieldset
+{
+  border: none;
+}
+
+
+/*Custom Radio Buttons:*/
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0.33em;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+/*END OF Custom Radio Buttons*/
