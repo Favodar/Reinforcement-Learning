@@ -24,6 +24,38 @@ function randomColor(colors) {
 }
 
 // Objects
+function Counter() {
+    this.startTime = Date.now();
+    this.counter = 3;
+
+    this.update = function () {
+        if (Date.now() > this.startTime + 1000) {
+            this.startTime = Date.now();
+            this.counter--;
+        }
+    }
+
+    this.draw = function () {
+        if (this.counter < 0) {
+            return;
+        }
+
+        ctx.beginPath();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold ' + (Date.now() - this.startTime) + 'px Courier';
+        ctx.strokeStyle = colors[1];
+
+        if (this.counter > 0) {
+            ctx.strokeText(this.counter, canvas.width / 2, canvas.height / 2);
+        }
+        else {
+            ctx.strokeText('GO', canvas.width / 2, canvas.height / 2);
+        }
+        ctx.closePath();
+    }
+}
+
 function Circle(radius) {
     this.radius = radius;
     this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
@@ -39,6 +71,12 @@ function Circle(radius) {
                 randomColor(colors)
             )
         );
+    }
+
+    this.organize = function () {
+        for (var i = 0; i < this.circleParticles.length; i++) {
+            this.circleParticles[i].shouldOrganize = true;
+        }
     }
 
     this.draw = function () {
@@ -65,6 +103,7 @@ function Circle(radius) {
 }
 
 function CircleParticle(circle, radius, color) {
+    this.circle = circle;
     this.x = circle.x;
     this.y = circle.y;
     this.radius = radius;
@@ -72,7 +111,13 @@ function CircleParticle(circle, radius, color) {
     this.radians = Math.random() * Math.PI * 2;
     this.velocity = randomIntFromRange(4, 6) * 0.01;
     this.distanceFromCenter = randomIntFromRange(circle.radius / 2, circle.radius);
+    this.unorganizedDistanceFromCenter = {
+        x: randomIntFromRange(circle.radius, canvas.width / 2),
+        y: randomIntFromRange(circle.radius, canvas.width / 2)
+    };
     this.lastPoint = { x: this.x, y: this.y };
+    this.organized = false;
+    this.shouldOrganize = false;
 
     this.draw = function () {
         ctx.beginPath();
@@ -87,9 +132,32 @@ function CircleParticle(circle, radius, color) {
     this.update = function () {
         this.lastPoint = { x: this.x, y: this.y };
 
-        this.radians += this.velocity;
-        this.x = circle.x + Math.cos(this.radians) * this.distanceFromCenter;
-        this.y = circle.y + Math.sin(this.radians) * this.distanceFromCenter;
+        if (this.organized) {
+            this.radians += this.velocity;
+            this.x = this.circle.x + Math.cos(this.radians) * this.distanceFromCenter;
+            this.y = this.circle.y + Math.sin(this.radians) * this.distanceFromCenter;
+        }
+        else {
+            this.radians += this.velocity;
+            this.x = this.circle.x + Math.cos(this.radians) * this.unorganizedDistanceFromCenter.x;
+            this.y = this.circle.y + Math.sin(this.radians) * this.unorganizedDistanceFromCenter.y;
+        }
+
+        if (this.shouldOrganize) {
+            if (this.unorganizedDistanceFromCenter.x < this.unorganizedDistanceFromCenter.y) {
+                this.unorganizedDistanceFromCenter.y -= 4;
+            }
+            else {
+                this.unorganizedDistanceFromCenter.x -= 4;
+            }
+
+            if (
+                this.unorganizedDistanceFromCenter.x <= this.distanceFromCenter
+                || this.unorganizedDistanceFromCenter.y <= this.distanceFromCenter
+            ) {
+                this.organized = true;
+            }
+        }
     }
 }
 
@@ -109,6 +177,12 @@ function Square(width, height) {
                 randomColor(colors)
             )
         );
+    }
+
+    this.organize = function () {
+        for (var i = 0; i < this.squareParticles.length; i++) {
+            this.squareParticles[i].shouldOrganize = true;
+        }
     }
 
     this.draw = function () {
@@ -135,13 +209,23 @@ function Square(width, height) {
 }
 
 function SquareParticle(square, radius, color) {
-    this.x = (square.x + square.width) / 2;
-    this.y = (square.y + square.height) / 2;
+    this.square = square;
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
     this.radius = radius;
     this.color = color;
     this.dx = (Math.random() - 0.5) + 2;
     this.dy = (Math.random() - 0.5) + 2;
     this.lastPoint = { x: this.x, y: this.y };
+    this.radians = Math.random() * Math.PI * 2;
+    this.velocity = randomIntFromRange(4, 6) * 0.01;
+    this.distanceFromCenter = randomIntFromRange(circle.radius / 2, circle.radius);
+    this.unorganizedDistanceFromCenter = {
+        x: randomIntFromRange(circle.radius, canvas.width / 2),
+        y: randomIntFromRange(circle.radius, canvas.width / 2)
+    };
+    this.organized = false;
+    this.shouldOrganize = false;
 
     this.draw = function () {
         ctx.beginPath();
@@ -156,31 +240,53 @@ function SquareParticle(square, radius, color) {
     this.update = function () {
         this.lastPoint = { x: this.x, y: this.y };
 
-        if (this.x > square.x + square.width) {
-            this.x = square.x + square.width;
-            this.dx = -this.dx;
+        if (this.organized) {
+            if (this.x > this.square.x + this.square.width) {
+                this.x = this.square.x + this.square.width;
+                this.dx = -this.dx;
+            }
+            if (this.x < this.square.x) {
+                this.x = this.square.x;
+                this.dx = -this.dx;
+            }
+            if (this.y > this.square.y + this.square.height) {
+                this.y = this.square.y + this.square.height;
+                this.dy = -this.dy;
+            }
+            if (this.y < this.square.y) {
+                this.y = this.square.y;
+                this.dy = -this.dy;
+            }
+
+            this.x += this.dx;
+            this.y += this.dy;
         }
-        if (this.x < square.x) {
-            this.x = square.x;
-            this.dx = -this.dx;
-        }
-        if (this.y > square.y + square.height) {
-            this.y = square.y + square.height;
-            this.dy = -this.dy;
-        }
-        if (this.y < square.y) {
-            this.y = square.y;
-            this.dy = -this.dy;
+        else {
+            this.radians += this.velocity;
+            this.x = this.square.x + Math.cos(this.radians) * this.unorganizedDistanceFromCenter.x;
+            this.y = this.square.y + Math.sin(this.radians) * this.unorganizedDistanceFromCenter.y;
         }
 
-        this.x += this.dx;
-        this.y += this.dy;
+        if (this.shouldOrganize) {
+            this.unorganizedDistanceFromCenter.x--;
+            this.unorganizedDistanceFromCenter.y--;
+
+            if (
+                this.x < square.x + square.width
+                && this.x > square.x
+                && this.y < square.y + square.height
+                && this.y > square.y
+            ) {
+                this.organized = true;
+            }
+        }
     }
 }
 
 // Implementation
 var circle = new Circle(100);
 var square = new Square(150, 150);
+var counter = new Counter();
 
 function animate() {
     requestAnimationFrame(animate);
@@ -188,11 +294,17 @@ function animate() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     circle.update();
-    square.update();
-
-
     circle.draw();
+
+    square.update();
     square.draw();
+
+    counter.update();
+    counter.draw();
 }
 
 animate();
+setTimeout(function () {
+    circle.organize();
+    square.organize();
+}, 3000);
