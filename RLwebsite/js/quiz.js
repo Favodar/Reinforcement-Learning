@@ -376,36 +376,81 @@ function SquareParticle(square, radius, color) {
 var circle = new Circle(100);
 var square = new Square(150, 150);
 var counter = new Counter();
-var errorBubbleWall = new BubbleWall(errorColors);
+var winBubbleWall = new BubbleWall(colors);
 var successBubbleWall = new BubbleWall(successColors);
+var success = false;
+var error = false;
+var win = false;
+
+window.addEventListener('click', function (event) {
+    if (Math.sqrt((mouse.x - circle.x) * (mouse.x - circle.x) + (mouse.y - circle.y) * (mouse.y - circle.y)) < circle.radius) {
+        successes++;
+        success = true;
+
+        successBubbleWall.reset();
+        setTimeout(function () {
+            success = false;
+            circle = new Circle(100);
+            square = new Square(150, 150);
+            circle.organize();
+            square.organize();
+        }, 4000);
+
+        if (successes >= attempts) {
+            win = true;
+            winBubbleWall.reset();
+            setTimeout(function () {
+                successBubbleWall.reset();
+                window.location.replace("https://favodar.github.io/Reinforcement-Learning/parallax.html");
+            }, 2000);
+        }
+    }
+    else if (
+        mouse.x < square.x + square.width
+        && mouse.x > square.x
+        && mouse.y < square.y + square.height
+        && mouse.y > square.y
+    ) {
+        error = true;
+        successes = 0;
+    }
+});
+
+window.addEventListener('mousemove', function (event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
 
 function animate() {
     requestAnimationFrame(animate);
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.05';
+    if (error) {
+        ctx.fillStyle = 'red';
+        error = false;
+    }
+    else {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05';
+    }
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    errorBubbleWall.update();
-    errorBubbleWall.draw();
+    if (!success && !win) {
+        circle.update();
+        circle.draw();
+
+        square.update();
+        square.draw();
+    }
+
+    winBubbleWall.update();
+    winBubbleWall.draw();
 
     successBubbleWall.update();
     successBubbleWall.draw();
-
-    circle.update();
-    circle.draw();
-
-    square.update();
-    square.draw();
 
     counter.update();
     counter.draw();
 }
 
 animate();
-successBubbleWall.reset();
-
-setTimeout(function () {
-    errorBubbleWall.reset();
-}, 1000);
 
 setTimeout(function () {
     counter.reset();
@@ -414,4 +459,4 @@ setTimeout(function () {
 setTimeout(function () {
     circle.organize();
     square.organize();
-}, 4000);
+}, 3500);
