@@ -14,6 +14,23 @@ var colors = [
     '#088eff'
 ];
 
+var successColors = [
+    '#009933',
+    '#00e64d',
+    '#b3ffcc'
+];
+
+var errorColors = [
+    '#cc0000',
+    '#ff5050',
+    '#ffb3b3'
+];
+
+var mouse = {
+    x: undefined,
+    y: undefined
+};
+
 // Utility functions
 function randomIntFromRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -24,9 +41,67 @@ function randomColor(colors) {
 }
 
 // Objects
+function Bubble(radius, color) {
+    this.radius = radius;
+    this.color = color;
+    this.x = 0;
+    this.y = -radius;
+    this.dy = 0;
+
+    this.reset = function () {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * canvas.height;
+        this.dy = (Math.random() * 3) + 5;
+    }
+
+    this.update = function () {
+        if (this.y > -radius) {
+            this.y -= this.dy;
+        }
+    }
+
+    this.draw = function () {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
+function BubbleWall(colors) {
+    this.bubbles = [];
+    for (var i = 0; i < 300; i++) {
+        this.bubbles.push(new Bubble(randomIntFromRange(20, 50), randomColor(colors)));
+    }
+
+    this.reset = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].reset();
+        }
+    }
+
+    this.update = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].update();
+        }
+    }
+
+    this.draw = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].draw();
+        }
+    }
+}
+
 function Counter() {
-    this.startTime = Date.now();
-    this.counter = 3;
+    this.startTime = -1;
+    this.counter = -1;
+
+    this.reset = function () {
+        this.startTime = Date.now();
+        this.counter = 3;
+    }
 
     this.update = function () {
         if (Date.now() > this.startTime + 1000) {
@@ -44,7 +119,21 @@ function Counter() {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.font = 'bold ' + (Date.now() - this.startTime) + 'px Courier';
-        ctx.strokeStyle = colors[1];
+        ctx.fillStyle = '#333';
+
+        if (this.counter > 0) {
+            ctx.fillText(this.counter, canvas.width / 2, canvas.height / 2);
+        }
+        else {
+            ctx.fillText('GO', canvas.width / 2, canvas.height / 2);
+        }
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold ' + (Date.now() - this.startTime) + 'px Courier';
+        ctx.strokeStyle = '#fff';
 
         if (this.counter > 0) {
             ctx.strokeText(this.counter, canvas.width / 2, canvas.height / 2);
@@ -287,11 +376,19 @@ function SquareParticle(square, radius, color) {
 var circle = new Circle(100);
 var square = new Square(150, 150);
 var counter = new Counter();
+var errorBubbleWall = new BubbleWall(errorColors);
+var successBubbleWall = new BubbleWall(successColors);
 
 function animate() {
     requestAnimationFrame(animate);
     ctx.fillStyle = 'rgba(255, 255, 255, 0.05';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    errorBubbleWall.update();
+    errorBubbleWall.draw();
+
+    successBubbleWall.update();
+    successBubbleWall.draw();
 
     circle.update();
     circle.draw();
@@ -304,7 +401,17 @@ function animate() {
 }
 
 animate();
+successBubbleWall.reset();
+
+setTimeout(function () {
+    errorBubbleWall.reset();
+}, 1000);
+
+setTimeout(function () {
+    counter.reset();
+}, 2000);
+
 setTimeout(function () {
     circle.organize();
     square.organize();
-}, 3000);
+}, 4000);
