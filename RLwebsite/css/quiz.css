@@ -1,15 +1,9 @@
-html, body {
-    height: 100%;
-}
-
 body {
     margin: 0;
-    display: flex;
+}
 
-    /* This centers our sketch horizontally. */
-    justify-content: center;
+canvas {
+    border: 1px solid black;
 
-    /* This centers our sketch vertically. */
-    align-items: center;
 }
 
