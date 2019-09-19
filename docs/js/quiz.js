@@ -1,139 +1,462 @@
-const circleDiameter = 200;
-const squareDiameter = 200;
-const tries = 3;
-const numParticles = 50;
+var canvas = document.querySelector('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+var ctx = canvas.getContext('2d');
 
-var circleX;
-var circleY;
-var squareX;
-var squareY;
+// Variables and Constants
 
-var clickTime;
-var currentTime;
-var currentTry;
-var reward;
-var penalty;
+var attempts = 3;
+var successes = 0;
 
-var particles;
+var colors = [
+    '#00bdff',
+    '#4d39ce',
+    '#088eff'
+];
 
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-    background(66, 66, 200);
+var successColors = [
+    '#009933',
+    '#00e64d',
+    '#b3ffcc'
+];
 
-    randomPos();
-    currentTry = 0;
-    reward = false;
-    penalty = false;
+var errorColors = [
+    '#cc0000',
+    '#ff5050',
+    '#ffb3b3'
+];
 
-    particles = [];
-    for (var i = 0; i < numParticles; i++) {
-        particles.push(new Particle(-50, -50));
+var mouse = {
+    x: undefined,
+    y: undefined
+};
+
+// Utility functions
+function randomIntFromRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomColor(colors) {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Objects
+function Bubble(radius, color) {
+    this.radius = radius;
+    this.color = color;
+    this.x = 0;
+    this.y = -radius;
+    this.dy = 0;
+
+    this.reset = function () {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * canvas.height;
+        this.dy = (Math.random() * 3) + 15;
+    }
+
+    this.update = function () {
+        if (this.y > -radius) {
+            this.y -= this.dy;
+        }
+    }
+
+    this.draw = function () {
+        ctx.beginPath();
+        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
     }
 }
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
+function BubbleWall(colors) {
+    this.bubbles = [];
+    for (var i = 0; i < 300; i++) {
+        this.bubbles.push(new Bubble(randomIntFromRange(20, 50), randomColor(colors)));
+    }
+
+    this.reset = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].reset();
+        }
+    }
+
+    this.update = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].update();
+        }
+    }
+
+    this.draw = function () {
+        for (var i = 0; i < this.bubbles.length; i++) {
+            this.bubbles[i].draw();
+        }
+    }
 }
 
+function Counter() {
+    this.startTime = -1;
+    this.counter = -1;
 
-//'game' loop
-function draw() {
-    currentTime = millis();
-    if (currentTry < tries) {
-        if (reward) {
-            if (currentTime - clickTime > 1000) {
-                randomPos();
-                currentTry++;
-                reward = false;
-            }
-            background(66, 200, 66);
+    this.reset = function () {
+        this.startTime = Date.now();
+        this.counter = 3;
+    }
+
+    this.update = function () {
+        if (Date.now() > this.startTime + 1000) {
+            this.startTime = Date.now();
+            this.counter--;
         }
-        else if (penalty) {
-            if (currentTime - clickTime > 1000) {
-                randomPos();
-                penalty = false;
-            }
-            background(200, 66, 66);
+    }
+
+    this.draw = function () {
+        if (this.counter < 0) {
+            return;
+        }
+
+        ctx.beginPath();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold ' + (Date.now() - this.startTime) + 'px Courier';
+        ctx.fillStyle = '#333';
+
+        if (this.counter > 0) {
+            ctx.fillText(this.counter, canvas.width / 2, canvas.height / 2);
         }
         else {
-            background(66, 66, 200);
+            ctx.fillText('GO', canvas.width / 2, canvas.height / 2);
         }
-        rect(squareX, squareY, squareDiameter, squareDiameter);
-        ellipse(circleX, circleY, circleDiameter, circleDiameter);
-        for (var i = 0; i < numParticles; i++) {
-            particles[i].x += particles[i].dx;
-            particles[i].y += particles[i].dy;
-            noStroke();
-            fill(particles[i].color);
-            ellipse(particles[i].x, particles[i].y, 5, 5);
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold ' + (Date.now() - this.startTime) + 'px Courier';
+        ctx.strokeStyle = '#fff';
+
+        if (this.counter > 0) {
+            ctx.strokeText(this.counter, canvas.width / 2, canvas.height / 2);
         }
-        stroke(0, 0, 0, 255);
-        fill(255, 255, 255);
+        else {
+            ctx.strokeText('GO', canvas.width / 2, canvas.height / 2);
+        }
+        ctx.closePath();
+    }
+}
+
+function Circle(radius) {
+    this.radius = radius;
+    this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
+    this.y = Math.random() * (canvas.height - this.radius * 2) + this.radius;
+    this.dx = (Math.random() - 0.5) * 2;
+    this.dy = (Math.random() - 0.5) * 2;
+    this.circleParticles = [];
+    for (var i = 0; i < 60; i++) {
+        this.circleParticles.push(
+            new CircleParticle(
+                this,
+                (Math.random() * 2) + 1,
+                randomColor(colors)
+            )
+        );
+    }
+
+    this.organize = function () {
+        for (var i = 0; i < this.circleParticles.length; i++) {
+            this.circleParticles[i].shouldOrganize = true;
+        }
+    }
+
+    this.draw = function () {
+        for (var i = 0; i < this.circleParticles.length; i++) {
+            this.circleParticles[i].draw();
+        }
+    }
+
+    this.update = function () {
+        if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+            this.dx = -this.dx;
+        }
+        if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+            this.dy = -this.dy;
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+
+        for (var i = 0; i < this.circleParticles.length; i++) {
+            this.circleParticles[i].update();
+        }
+    }
+}
+
+function CircleParticle(circle, radius, color) {
+    this.circle = circle;
+    this.x = circle.x;
+    this.y = circle.y;
+    this.radius = radius;
+    this.color = color;
+    this.radians = Math.random() * Math.PI * 2;
+    this.velocity = randomIntFromRange(4, 6) * 0.01;
+    this.distanceFromCenter = randomIntFromRange(circle.radius / 2, circle.radius);
+    this.unorganizedDistanceFromCenter = {
+        x: randomIntFromRange(circle.radius, canvas.width / 2),
+        y: randomIntFromRange(circle.radius, canvas.width / 2)
+    };
+    this.lastPoint = { x: this.x, y: this.y };
+    this.organized = false;
+    this.shouldOrganize = false;
+
+    this.draw = function () {
+        ctx.beginPath();
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.radius;
+        ctx.moveTo(this.lastPoint.x, this.lastPoint.y);
+        ctx.lineTo(this.x, this.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    this.update = function () {
+        this.lastPoint = { x: this.x, y: this.y };
+
+        if (this.organized) {
+            this.radians += this.velocity;
+            this.x = this.circle.x + Math.cos(this.radians) * this.distanceFromCenter;
+            this.y = this.circle.y + Math.sin(this.radians) * this.distanceFromCenter;
+        }
+        else {
+            this.radians += this.velocity;
+            this.x = this.circle.x + Math.cos(this.radians) * this.unorganizedDistanceFromCenter.x;
+            this.y = this.circle.y + Math.sin(this.radians) * this.unorganizedDistanceFromCenter.y;
+        }
+
+        if (this.shouldOrganize) {
+            if (this.unorganizedDistanceFromCenter.x < this.unorganizedDistanceFromCenter.y) {
+                this.unorganizedDistanceFromCenter.y -= 4;
+            }
+            else {
+                this.unorganizedDistanceFromCenter.x -= 4;
+            }
+
+            if (
+                this.unorganizedDistanceFromCenter.x <= this.distanceFromCenter
+                || this.unorganizedDistanceFromCenter.y <= this.distanceFromCenter
+            ) {
+                this.organized = true;
+            }
+        }
+    }
+}
+
+function Square(width, height) {
+    this.width = width;
+    this.height = height;
+    this.x = Math.random() * (canvas.width - this.width);
+    this.y = Math.random() * (canvas.height - this.height);
+    this.dx = (Math.random() - 0.5) * 2;
+    this.dy = (Math.random() - 0.5) * 2;
+    this.squareParticles = [];
+    for (var i = 0; i < 100; i++) {
+        this.squareParticles.push(
+            new SquareParticle(
+                this,
+                (Math.random() * 2) + 1,
+                randomColor(colors)
+            )
+        );
+    }
+
+    this.organize = function () {
+        for (var i = 0; i < this.squareParticles.length; i++) {
+            this.squareParticles[i].shouldOrganize = true;
+        }
+    }
+
+    this.draw = function () {
+        for (var i = 0; i < this.squareParticles.length; i++) {
+            this.squareParticles[i].draw();
+        }
+    }
+
+    this.update = function () {
+        if (this.x + this.width > canvas.width || this.x < 0) {
+            this.dx = -this.dx;
+        }
+        if (this.y + this.height > canvas.height || this.y < 0) {
+            this.dy = -this.dy;
+        }
+
+        this.x += this.dx;
+        this.y += this.dy;
+
+        for (var i = 0; i < this.squareParticles.length; i++) {
+            this.squareParticles[i].update();
+        }
+    }
+}
+
+function SquareParticle(square, radius, color) {
+    this.square = square;
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = radius;
+    this.color = color;
+    this.dx = (Math.random() - 0.5) + 2;
+    this.dy = (Math.random() - 0.5) + 2;
+    this.lastPoint = { x: this.x, y: this.y };
+    this.radians = Math.random() * Math.PI * 2;
+    this.velocity = randomIntFromRange(4, 6) * 0.01;
+    this.distanceFromCenter = randomIntFromRange(circle.radius / 2, circle.radius);
+    this.unorganizedDistanceFromCenter = {
+        x: randomIntFromRange(circle.radius, canvas.width / 2),
+        y: randomIntFromRange(circle.radius, canvas.width / 2)
+    };
+    this.organized = false;
+    this.shouldOrganize = false;
+
+    this.draw = function () {
+        ctx.beginPath();
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.radius;
+        ctx.moveTo(this.lastPoint.x, this.lastPoint.y);
+        ctx.lineTo(this.x, this.y);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    this.update = function () {
+        this.lastPoint = { x: this.x, y: this.y };
+
+        if (this.organized) {
+            if (this.x > this.square.x + this.square.width) {
+                this.x = this.square.x + this.square.width;
+                this.dx = -this.dx;
+            }
+            if (this.x < this.square.x) {
+                this.x = this.square.x;
+                this.dx = -this.dx;
+            }
+            if (this.y > this.square.y + this.square.height) {
+                this.y = this.square.y + this.square.height;
+                this.dy = -this.dy;
+            }
+            if (this.y < this.square.y) {
+                this.y = this.square.y;
+                this.dy = -this.dy;
+            }
+
+            this.x += this.dx;
+            this.y += this.dy;
+        }
+        else {
+            this.radians += this.velocity;
+            this.x = this.square.x + Math.cos(this.radians) * this.unorganizedDistanceFromCenter.x;
+            this.y = this.square.y + Math.sin(this.radians) * this.unorganizedDistanceFromCenter.y;
+        }
+
+        if (this.shouldOrganize) {
+            this.unorganizedDistanceFromCenter.x--;
+            this.unorganizedDistanceFromCenter.y--;
+
+            if (
+                this.x < square.x + square.width
+                && this.x > square.x
+                && this.y < square.y + square.height
+                && this.y > square.y
+            ) {
+                this.organized = true;
+            }
+        }
+    }
+}
+
+// Implementation
+var circle = new Circle(100);
+var square = new Square(150, 150);
+var counter = new Counter();
+var winBubbleWall = new BubbleWall(colors);
+var successBubbleWall = new BubbleWall(successColors);
+var success = false;
+var error = false;
+var win = false;
+
+window.addEventListener('click', function (event) {
+    if (Math.sqrt((mouse.x - circle.x) * (mouse.x - circle.x) + (mouse.y - circle.y) * (mouse.y - circle.y)) < circle.radius) {
+        successes++;
+        success = true;
+
+        successBubbleWall.reset();
+        setTimeout(function () {
+            success = false;
+            circle = new Circle(100);
+            square = new Square(150, 150);
+            circle.organize();
+            square.organize();
+        }, 1200);
+
+        if (successes >= attempts) {
+            win = true;
+            winBubbleWall.reset();
+            window.location.replace("https://favodar.github.io/Reinforcement-Learning/parallax.html");
+            setTimeout(function () {
+                successBubbleWall.reset();
+            }, 2000);
+        }
+    }
+    else if (
+        mouse.x < square.x + square.width
+        && mouse.x > square.x
+        && mouse.y < square.y + square.height
+        && mouse.y > square.y
+    ) {
+        error = true;
+        successes = 0;
+    }
+});
+
+window.addEventListener('mousemove', function (event) {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+function animate() {
+    requestAnimationFrame(animate);
+    if (error) {
+        ctx.fillStyle = 'red';
+        error = false;
     }
     else {
-        background(200, 200, 200);
-        //resizeCanvas(0, 0);
-        //setActiveStyleSheet("parallax")
-        //window.location.replace("parallax.html");
-        window.location.assign("parallax.html");
-        
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05';
     }
-}
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-function mousePressed() {
-    clickTime = millis();
-    if (mouseOverSquare()) {
-        penalty = true;
+    if (!success && !win) {
+        circle.update();
+        circle.draw();
+
+        square.update();
+        square.draw();
     }
-    else if (mouseOverCircle()) {
-        for (var i = 0; i < numParticles; i++) {
-            particles[i].x = mouseX;
-            particles[i].y = mouseY;
-        }
-        reward = true;
-    }
+
+    winBubbleWall.update();
+    winBubbleWall.draw();
+
+    successBubbleWall.update();
+    successBubbleWall.draw();
+
+    counter.update();
+    counter.draw();
 }
 
-function randomPos() {
-    circleX = random(windowWidth - circleDiameter);
-    circleY = random(windowHeight - circleDiameter);
-    squareX = random(windowWidth - squareDiameter);
-    squareY = random(windowHeight - squareDiameter);
-}
+animate();
 
-function mouseOverSquare() {
-    return mouseX > squareX
-        && mouseX < squareX + squareDiameter
-        && mouseY > squareY
-        && mouseY < squareY + squareDiameter;
-}
+setTimeout(function () {
+    counter.reset();
+}, 2000);
 
-function mouseOverCircle() {
-    return mouseX > circleX - circleDiameter / 2
-        && mouseX < circleX + circleDiameter / 2
-        && mouseY > circleY - circleDiameter / 2
-        && mouseY < circleY + circleDiameter / 2;
-}
-
-class Particle {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        let radians = random(3.14159 * 2);
-        let speed = random(1, 10);
-        this.dx = Math.cos(radians) * speed;
-        this.dy = Math.sin(radians) * speed;
-        this.color = color(random(255), random(255), random(255), 255);
-    }
-}
-
-/**function setActiveStyleSheet(title) {
-   var i, a, main;
-   for(i=0; (a = document.getElementsByTagName("link")<i>); i++) {
-     if(a.getAttribute("rel").indexOf("style") != -1
-        && a.getAttribute("title")) {
-       a.disabled = true;
-       if(a.getAttribute("title") == title) a.disabled = false;
-     }
-   }
-}**/
+setTimeout(function () {
+    circle.organize();
+    square.organize();
+}, 3500);
