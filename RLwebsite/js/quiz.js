@@ -51,7 +51,7 @@ function Bubble(radius, color) {
     this.reset = function () {
         this.x = Math.random() * canvas.width;
         this.y = canvas.height + Math.random() * canvas.height;
-        this.dy = (Math.random() * 3) + 5;
+        this.dy = (Math.random() * 3) + 15;
     }
 
     this.update = function () {
@@ -394,14 +394,14 @@ window.addEventListener('click', function (event) {
             square = new Square(150, 150);
             circle.organize();
             square.organize();
-        }, 4000);
+        }, 1200);
 
         if (successes >= attempts) {
             win = true;
             winBubbleWall.reset();
+            window.location.replace("https://favodar.github.io/Reinforcement-Learning/parallax.html");
             setTimeout(function () {
                 successBubbleWall.reset();
-                window.location.replace("https://favodar.github.io/Reinforcement-Learning/parallax.html");
             }, 2000);
         }
     }
