@@ -45,7 +45,7 @@
         <div class="parallax-1"></div>
                 
 
-        <div class="parallax_text" style="top: 40%; position: absolute">
+        <div class="parallax_text" style="top: 40%; position: absolute; padding-top: 1em;">
 
                 <h3><span title="You are the 10 000 000 000th visitor of this page!"> Congratulations!</span></h3> You just learned something with Reinforcement Learning (RL): click on the circles! <br>
                 The basic concept is simple: an <i>agent</i> is in a <i>state</i> and may perform different <i>actions</i>, which lead to new states. The actions are rewarded or punished (a punishment may also be called “negative reward”).
@@ -67,20 +67,22 @@
 
     <div class="parallax_text">
 
-        In the preceding exercise, you were the "agent". The agent could also be described as the decision algorithm. What you saw at the screen, inside the browser window, would be called the current "state". The agent takes the current state as input, and based on this input, it choses an "action". <br>
-        <br>
-        In this case, there were two possible "actions" in each state: clicking on the square, or clicking on the circle, which gave a reward in the case of the circle, and a punishment in the square-case.<br>
-        So the state could be seen as the input, the agent as the algorithm, and the action as the output.
-        <br>
-        <img src="pictures/RL_agent_pseudocode.jpg" title="pseudocode of an RL agent" alt="pseudocode of an RL agent" style="padding:50px; width: 80%;">
-        <br>
-        <nav class="btn-bar nav-dark">
-
-            <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="-1">
-                <i class="fa fa-fw fa-lg fa-info " ></i> Notation
-            </a>
-        </nav>
-    </div>
+        <div class="text_container">
+            In the preceding exercise, you were the "agent". The agent could also be described as the decision algorithm. What you saw on the screen, inside the browser window, would be called the current "state". The agent takes the current state as input, and based on this input, it choses an "action". <br>
+            <br>
+            In this case, there were two possible "actions" in each state: clicking on the square, or clicking on the circle, which gave a reward in the case of the circle, and a punishment in the square-case.<br>
+            So the state could be seen as the input, the agent as the algorithm, and the action as the output.
+            <br>
+            <img src="pictures/RL_agent_pseudocode.jpg" title="pseudocode of an RL agent" alt="pseudocode of an RL agent" style="padding:50px; width: 80%;">
+            <br>
+            <nav class="btn-bar nav-dark">
+    
+                <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="-1">
+                    <i class="fa fa-fw fa-lg fa-info " ></i> Notation
+                </a>
+            </nav>
+        </div>
+        </div>
 
     <div class="overlay" id="overlay-1">
             <p>For the purpose of this introduction, I will use the following notation. This will only be relevant for some Detail Chapters, so you don&rsquo;t need it to understand the main lessons.</p>
@@ -496,7 +498,7 @@ And although NNs are very popular, they are not the only powerful form of functi
 
 <script src="js/parallax.js"></script>
 
-<!-- Parallax libraries: -->
+<!-- Parallax libraries (not in use as of now, were intended to fix parallax for mobile): -->
 <script src="js/rellax.js"></script>
 <!-- <script>
   // Accepts any class name

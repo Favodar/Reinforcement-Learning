@@ -39,20 +39,20 @@ body
         font-style: italic;
     }
     body:before {
-    content: "";
-    display: block;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
-    background-image: url("../pictures/unfree/bigstock-Artificial-intelligence-modern-207054388.jpg");
+      content: "";
+      display: block;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -10;
+      background-image: url("../pictures/unfree/bigstock-Artificial-intelligence-modern-207054388.jpg");
 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
   }
 }
 
@@ -217,13 +217,18 @@ body
     
 
 }
+
 .parallax_text {
     color: rgb(103, 102, 129);
     background-color: rgb(255, 255, 255);
     background-image: none;
     text-align:justify;
-    padding:4em 5em;
+/*     padding:4em 5em; */
+    padding: 3em calc(25vw - 110px);
+    
     width: 100%;
+
+    margin: auto;
 
 
 
@@ -247,12 +252,22 @@ body
     position: relative;
     float: left; */
 
-/*    animation-name: appear;
+/*  animation-name: appear;
     animation-duration: 10s;
     animation-delay 4s; */
-    
-    
 
+}
+
+.text_container
+{
+  max-width: 600px;
+  margin: auto;
+
+  background-color: white;
+
+/*   border-style: groove;
+  border-radius: 1em;
+  padding: 2em 2em; */
 
 }
 
@@ -313,9 +328,10 @@ a {
 h3 {
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  font: 2em "Lato", sans-serif;
+  font: 1.8em "Lato", sans-serif;
   color: #111;
-    text-align: center;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .bgimg-1, .bgimg-2, .bgimg-3 {
