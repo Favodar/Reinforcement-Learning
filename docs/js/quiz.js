@@ -399,7 +399,7 @@ window.addEventListener('click', function (event) {
         if (successes >= attempts) {
             win = true;
             winBubbleWall.reset();
-            window.location.replace("https://favodar.github.io/Reinforcement-Learning/parallax.html");
+            window.location.replace("parallax.html");
             setTimeout(function () {
                 successBubbleWall.reset();
             }, 2000);
