@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
 
 
-    <title>Reinforcement Learning</title>
+    <title>reinforcement learning</title>
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
 <!--     <link rel="stylesheet" type="text/css" href="css/demo.css" /> -->
 <!--     <link rel="stylesheet" type="text/css" href="css/component.css" /> -->
@@ -47,8 +47,8 @@
 
         <div class="parallax_text" style="top: 40%; position: absolute; padding-top: 1em;">
 
-                <h3><span title="You are the 10 000 000 000th visitor of this page!"> Congratulations!</span></h3> You just learned something with Reinforcement Learning (RL): click on the circles! <br>
-                The basic concept is simple: an <i>agent</i> is in a <i>state</i> and may perform different <i>actions</i>, which lead to new states. The actions are rewarded or punished (a punishment may also be called “negative reward”).
+                <h3><span title="You are the 10 000 000 000th visitor of this page!"> Congratulations!</span></h3> You just learned something with reinforcement learning (RL): click on the circles! <br>
+                The basic concept of RL is simple: an <i>agent</i> is in a <i>state</i> and may perform different <i>actions</i>, which lead to new states. The actions are rewarded or punished (a punishment may also be called “negative reward”).
                 Based on the received <i>rewards</i>, the agent learns to perform the desired actions. <br>
                 Wait, but how do these terms map on the game with the squares and circles? Scroll down to find out!
             </div>
@@ -68,7 +68,7 @@
     <div class="parallax_text">
 
 
-            In the preceding exercise, you were the "agent". The agent could also be described as the decision algorithm. What you saw on the screen, inside the browser window, would be called the current "state". The agent takes the current state as input, and based on this input, it choses an "action". <br>
+            In the preceding exercise, you were the "agent". The agent could also be described as the decision algorithm. What you saw on the screen, inside the browser window, would be called the current "state". The agent takes the current state as input, and based on this input, it chooses an "action". <br>
             <br>
             In this case, there were two possible "actions" in each state: clicking on the square, or clicking on the circle, which gave a reward in the case of the circle, and a punishment in the square-case.<br>
             So the state could be seen as the input, the agent as the algorithm, and the action as the output.
@@ -93,9 +93,9 @@
     <div class="parallax-3"></div>
 
     <div class="parallax_text">
-        You learned, by means of Reinforcement Learning, to perform the optimal action for each state: clicking on the circle. The solution came to you so easily because
+        You learned, by means of reinforcement learning, to perform the optimal action for each state: clicking on the circle. The solution came to you so easily because
         <h3><span title="Or are they dancers?">humans are Reinforcement Learners</span></h3>
-        (and because it was an easy exercise). Evolution came up with this concept and it worked extremely well, so well in fact that nowadays almost all animals possess it.
+        (and because it was an easy exercise). Evolution came up with this concept and it worked extremely well, so well in fact that nowadays almost all animals have it.
         <nav class="btn-bar nav-dark">
 
             <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="0">
@@ -106,9 +106,9 @@
     
 
     <div class="overlay" id="overlay0">
-            <p>Reinforcement Learning in Animals</p>
+            <p>Reinforcement learning in Animals</p>
             
-            <p>Since &ldquo;Reinforcement Learning&rdquo; is a pretty broad term that includes lots of different algorithms, it is quite imprecise to say that animals possess &ldquo;it&rdquo;.<br />It is quite clear that animals (including humans) use some form of RL, and also quite clear that they don&rsquo;t use all RL algorithms that some random computer scientist ever came up with.<br />Which forms of RL animals use exactly is still being debated and not conclusively established, but let&rsquo;s have a look at what science has uncovered!<br />One paradigm of RL that seems to play a big role in animals is called &ldquo;Temporal Difference Learning&rdquo;, or short: TD learning. Ever heard of the neurotransmitter &ldquo;dopamine&rdquo;, which is often colloquially called the &ldquo;pleasure hormone&rdquo; or the like? It is true that dopamine is, among other things, related to pleasure (reward!). But it seems that this is not the whole story; it is now believed that dopamine represents the anticipation of reward, or more precisely, it represents the prediction error of the reward. What the hell does that mean?<br />It is actually quite simple: the brain has expectations about the amount of reward a certain action will bring. The difference between this predicted reward and the actual outcome is called the prediction error. If there&rsquo;s more reward than expected, certain neurons show increased activity, and more dopamine than usual is emitted, which leads to a better prediction next time - learning has occured. This means describing dopamine as a simple reward neurotransmitter would be wrong - there is no dopamine reaction even in cases of very high reward, as long as the reward was already anticipated.</p>
+            <p>Since &ldquo;reinforcement learning&rdquo; is a pretty broad term that includes lots of different algorithms, it is quite imprecise to say that animals have &ldquo;it&rdquo;.<br />It is quite clear that animals (including humans) use some form of RL, and also quite clear that they don&rsquo;t use all RL algorithms that some random computer scientist ever came up with.<br />Which forms of RL animals use exactly is still being debated and not conclusively established, but let&rsquo;s have a look at what science has uncovered!<br />One paradigm of RL that seems to play a big role in animals is called &ldquo;Temporal Difference Learning&rdquo;, or short: TD learning. Ever heard of the neurotransmitter &ldquo;dopamine&rdquo;, which is often colloquially called the &ldquo;pleasure hormone&rdquo; or the like? It is true that dopamine is, among other things, related to pleasure (reward!). But it seems that this is not the whole story; it is now believed that dopamine represents the anticipation of reward, or more precisely, it represents the prediction error of the reward. What the hell does that mean?<br />It is actually quite simple: the brain has expectations about the amount of reward a certain action will bring. The difference between this predicted reward and the actual outcome is called the prediction error. If there&rsquo;s more reward than expected, certain neurons show increased activity, and more dopamine than usual is emitted, which leads to a better prediction next time - learning has occured. This means describing dopamine as a simple reward neurotransmitter would be wrong - there is no dopamine reaction even in cases of very high reward, as long as the reward was already anticipated.</p>
             <p>(Actually, it is not the difference in reward that&rsquo;s computed, but rather the difference in state utilities (between expected utility and newly computed utility) - more on that later!)</p>
             
     </div>
@@ -118,7 +118,7 @@
     <div class="parallax_text">
         That sounds more like psychology than computer science? That’s because it is! <br>
         Since it works so well in nature, computer science has adopted it as a Machine Learning (ML) technique, with huge success.
-        As a consequence, RL is now a hot topic within the fields of computer science and psychology, and progress in either context can often be applied to the other field. This means new algorithms or insights that stem from computer science often help to deepen our understanding of RL in animals. On the other hand, the more we find out about how RL is implemented in the brain, the closer we get to building <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence"> Artificial General Intelligence (AGI)</a>, an AI that is on par with humans in cognitive abilities and might even surpass them soon thereafter. <br>
+        As a consequence, RL is now a hot topic within the fields of computer science and psychology, and progress in either context can often be applied to the other field. This means new algorithms or insights that stem from computer science often help to deepen our understanding of RL in animals. On the other hand, the more we find out about how RL is implemented in the brain, the closer we get to building <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence"> artificial general intelligence (AGI)</a>, an AI that is on par with humans in cognitive abilities and might even surpass them soon thereafter. <br>
         Is that a goal we should work on? People disagree on this, but Google's <a href="https://www.technologyreview.com/s/601139/how-google-plans-to-solve-artificial-intelligence/">DeepMind certainly thinks so.</a>
         
     </div>
@@ -141,7 +141,7 @@
             <h3>The trade-off between exploration and exploitation</h3>    
         
         is the first one.
-        When you learn something new, you first want to try out many different actions to find out which ones are the most rewarding (exploration). You are not satisfied with the first action that yields a positive reward, because there might be even better actions! But at some point, you want to use what you’ve learned so far and chose the actions that gave you the highest reward in the past (exploitation). The question is: how much should you explore, and when should you start exploiting your knowledge? Should you stop exploring completely at some point or still try out new things once in a while? If you don’t know the general answer, it’s because there is none. The right approach depends on the circumstances, and is in many cases simply not known.
+        When you learn something new, you first want to try out many different actions to find out which ones are the most rewarding (exploration). You are not satisfied with the first action that yields a positive reward, because there might be even better actions! But at some point, you want to use what you’ve learned so far and choose the actions that gave you the highest reward in the past (exploitation). The question is: how much should you explore, and when should you start exploiting your knowledge? Should you stop exploring completely at some point or still try out new things once in a while? If you don’t know the general answer, it’s because there is none. The right approach depends on the circumstances, and is in many cases simply not known.
         In most cases it's probably a good idea to start with a lot of exploration, and gradually shift the strategy towards more exploitation, only maintaining a very small amount of exploration after a lot of learning has already taken place.
 
         <nav class="btn-bar nav-dark">
@@ -155,8 +155,8 @@
     </div>
 
     <div class="overlay" id="overlay1">
-            <p>Selecting actions in a way that always exploits current knowledge is called greedy. &ldquo;Greedy action selection always exploits current knowledge to maximize immediate<br />reward; it spends no time at all sampling apparently inferior actions to see if they might really be better.&rdquo; [1]<br />Of course with this method, the algorithm can&rsquo;t learn very well. A simple way to exploit knowledge a lot, but which also guarantees we will also discover the best actions in the long run, is the &epsilon;-greedy method: it is greedy most of the time, but with a small probability &epsilon;, it selects a random action. For example, &epsilon;-greedy action selection with &epsilon; = 0.1 selects the best action, according to our current knowledge, 90% of the time, and in 10% of the cases it choses a random action.</p>
-            <p>So what&rsquo;s a good &epsilon; value? This depends on the circumstances, but here are some reflections. An &epsilon; value of 0 (meaning a greedy method) performs better in the short run, but might perform worse in the long run (by getting stuck in local maxima), because it never explores seemingly bad options. A big &epsilon; finds better actions quickly, but keeps on performing random (suboptimal) actions with the same big &epsilon; probability. A small &epsilon; on the other hand improves more slowly, because it doesn&rsquo;t try out new things that much, but eventually it will surpass the other two because it finds the optimal actions and only rarely choses a random action, selecting the best actions almost always after a lot of training. [1]<br />As a compromise, one can use a shrinking &epsilon; value that starts out big and approaches 0 over time. In a static environment, this algorithm would learn quickly in the beginning, and transition to exploiting this knowledge more and more.</p>
+            <p>Selecting actions in a way that always exploits current knowledge is called greedy. &ldquo;Greedy action selection always exploits current knowledge to maximize immediate<br />reward; it spends no time at all sampling apparently inferior actions to see if they might really be better.&rdquo; [1]<br />Of course with this method, the algorithm can&rsquo;t learn very well. A simple way to exploit knowledge a lot, but which also guarantees we will also discover the best actions in the long run, is the &epsilon;-greedy method: it is greedy most of the time, but with a small probability &epsilon;, it selects a random action. For example, &epsilon;-greedy action selection with &epsilon; = 0.1 selects the best action, according to our current knowledge, 90% of the time, and in 10% of the cases it chooses a random action.</p>
+            <p>So what&rsquo;s a good &epsilon; value? This depends on the circumstances, but here are some reflections. An &epsilon; value of 0 (meaning a greedy method) performs better in the short run, but might perform worse in the long run (by getting stuck in local maxima), because it never explores seemingly bad options. A big &epsilon; finds better actions quickly, but keeps on performing random (suboptimal) actions with the same big &epsilon; probability. A small &epsilon; on the other hand improves more slowly, because it doesn&rsquo;t try out new things that much, but eventually it will surpass the other two because it finds the optimal actions and only rarely chooses a random action, selecting the best actions almost always after a lot of training. [1]<br />As a compromise, one can use a shrinking &epsilon; value that starts out big and approaches 0 over time. In a static environment, this algorithm would learn quickly in the beginning, and transition to exploiting this knowledge more and more.</p>
             <p>This being said, an &epsilon; value that never goes under a certain threshold is still better suited for a changing environment where the optimal actions change over time.</p>
             
             <p class="reference">[1] R Sutton, A. Barto. 2017. Reinforcement Learning: An Introduction ****Complete Draft****
@@ -187,14 +187,14 @@
     <div class="overlay" id="overlay1.2">
             <p>The discount rate is written as gamma:</p>
             <p>&gamma; := discount rate<br />t := time step</p>
-            <p>Example: Rt = rt + y*rt+1 + y&sup2;*rt+2 ...</p>
+            <p>Example: Rt = rt + &gamma;*rt+1 + &gamma;&sup2;*rt+2 ...</p>
     </div>
 
     <div class="parallax">
     </div>
 
     <div class= "parallax_text">
-        This means ideally, we don't just chose the action that gives the highest reward now, we chose the one with the potentially highest (discounted)
+        This means ideally, we don't just choose the action that gives the highest reward now, we choose the one with the potentially highest (discounted)
         sum of rewards in the future. <br>
         In other words, if we see the future as different paths and the actions are the choices we make at the forks that lie ahead, we always want to take the fork that gives us access to the path that contains the most reward points, IF we decide optimally at all following forks.<br>
         
@@ -221,7 +221,7 @@ we can’t fully know everything that’s going on. So more realistically, the s
     </div>
 
     <div class= "parallax_text">
-        Now, when we only have a small set of states, we can “simply” calculate the rewards of each state and we have a working solution: in each state, chose the action that has the highest utility.
+        Now, when we only have a small set of states, we can “simply” calculate the rewards of each state and we have a working solution: in each state, choose the action that has the highest utility.
         <nav class="btn-bar nav-dark">
 
             <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="1.1">
@@ -233,7 +233,7 @@ we can’t fully know everything that’s going on. So more realistically, the s
 
     <div class="overlay" id="overlay1.1">
             <p>The equation that describes the optimal actions with regard to their future reward potential is known as the &ldquo;Bellman optimality equation&rdquo;.</p>
-            <p>Let&rsquo;s define the function that gives us the utility u (the sum of future rewards) of a state s. The utility would of course depend on the actions that the agent takes in the future. The book of rules that guides the behaviour of an agent is called a policy, denoted as 𝜋.<br />Then the function would look like this<br />u<sub>𝜋</sub>(s)<br />Meaning: the utility u of a state s when following the policy 𝜋.<br />Earlier I said we want to take the fork the gives us access to the path with the most utility, under the premise that we decide optimally at all following forks. The function that returns the utility of a state under an optimal policy 𝜋<sub>*</sub> (meaning the agents makes optimal decisions) is written like this<br />u<sub>*</sub>(s)<br />Now, if we want to know which path to take, we&rsquo;d have to look up where the paths lead and calculate the utility of all the states that we can reach ( u<sub>*</sub>(s1), u<sub>*</sub>(s2), u<sub>*</sub>(s3), &hellip;).<br />It gets even easier when we use a function that gives us the utility of a certain action that we can choose when we are in a specific state. In order to not confuse this function with the other function, let&rsquo;s denote the utility function as q this time.<br />So let&rsquo;s define the function that gives us the utility of an action a, when we&rsquo;re in state s, under an optimal policy, as<br />q<sub>*</sub>(s, a)<br />This function returns the utility of an action that we decide on in a specific state (the same action might yield different results in different states).<br />Okay, so we defined a function, but how does the term for computing the utility actually look like?</p>
+            <p>Let&rsquo;s define the function that gives us the utility u (the sum of future rewards) of a state s. The utility would of course depend on the actions that the agent takes in the future. The book of rules that guides the behaviour of an agent is called a policy, denoted as 𝜋.<br />Then the function would look like this<br />u<sub>𝜋</sub>(s)<br />Meaning: the utility u of a state s when following the policy 𝜋.<br />Earlier I said we want to take the fork that gives us access to the path with the most utility, under the premise that we decide optimally at all following forks. The function that returns the utility of a state under an optimal policy 𝜋<sub>*</sub> (meaning the agents makes optimal decisions) is written like this<br />u<sub>*</sub>(s)<br />Now, if we want to know which path to take, we&rsquo;d have to look up where the paths lead and calculate the utility of all the states that we can reach ( u<sub>*</sub>(s1), u<sub>*</sub>(s2), u<sub>*</sub>(s3), &hellip;).<br />It gets even easier when we use a function that gives us the utility of a certain action that we can choose when we are in a specific state. In order to not confuse this function with the other function, let&rsquo;s denote the utility function as q this time.<br />So let&rsquo;s define the function that gives us the utility of an action a, when we&rsquo;re in state s, under an optimal policy, as<br />q<sub>*</sub>(s, a)<br />This function returns the utility of an action that we decide on in a specific state (the same action might yield different results in different states).<br />Okay, so we defined a function, but how does the term for computing the utility actually look like?</p>
 
             <img src="pictures/equations/bellman.svg" title="This is the optimal equation. You may not like it, but this is what peak performance looks like." alt="The Bellman equation for q(s, a)" style="padding:50px; width: 80%;">
 
@@ -241,8 +241,8 @@ we can’t fully know everything that’s going on. So more realistically, the s
             
             <img src="pictures/equations/bellman_q.svg" title="This is the optimal equation. You may not like it, but this is what peak performance looks like." alt="The Bellman equation for q(s, a)" style="padding:50px; width: 80%;">
 
-            <p>This is the Bellman optimality equation.<br /> u<sub>*</sub>(s) is interpreted as such:<br />Of the available actions in state s, chose the one with the maximum sum that is comprised of the probability of a reward, times the reward plus the utility of the <i>next</i> state. The utility of the next state is discounted by the discount rate &gamma;.<br />As you can see, it is recursive: u<sub>*</sub>(s) contains u<sub>*</sub>(s&rsquo;), where s&rsquo; is the next state. This means writing the whole equation down for an actual RL problem would be infeasible for a human, but it&rsquo;s standard practice for a computer, and makes this a part of dynamic programming.</p>
-            <p>This is the theoretically ideal solution for an environment of which the dynamics are known. So did we already &ldquo;solve&rdquo; Reinforcement Learning for environments where we have complete information? Unfortunately, not at all. As you might already suspect, since it is recursive, the Bellman optimality equation takes unfathomable amounts of computing power and memory in complex environments, which makes it infeasible for almost all real world applications. Additionally, the most interesting problems which we want so solve with ML often have incomplete information, meaning the dynamics of the environment are not fully known. Still, the Bellman optimality equation is important groundwork, and many RL algorithms build on it by trying to approximate its solution [1].</p>
+            <p>This is the Bellman optimality equation.<br /> u<sub>*</sub>(s) is interpreted as such:<br />Of the available actions in state s, choose the one with the maximum sum that is comprised of the probability of a reward, times the reward plus the utility of the <i>next</i> state. The utility of the next state is discounted by the discount rate &gamma;.<br />As you can see, it is recursive: u<sub>*</sub>(s) contains u<sub>*</sub>(s&rsquo;), where s&rsquo; is the next state. This means writing the whole equation down for an actual RL problem would be infeasible for a human, but it&rsquo;s standard practice for a computer, and makes this a part of dynamic programming.</p>
+            <p>This is the theoretically ideal solution for an environment of which the dynamics are known. So did we already &ldquo;solve&rdquo; reinforcement learning for environments where we have complete information? Unfortunately, not at all. As you might already suspect, since it is recursive, the Bellman optimality equation takes unfathomable amounts of computing power and memory in complex environments, which makes it infeasible for almost all real world applications. Additionally, the most interesting problems which we want so solve with ML often have incomplete information, meaning the dynamics of the environment are not fully known. Still, the Bellman optimality equation is important groundwork, and many RL algorithms build on it by trying to approximate its solution [1].</p>
             <p>[1] https://www.tu-chemnitz.de/informatik/KI/scripts/ws0910/ml09_3.pdf p.25/slide 48</p>
                         
     </div>
@@ -278,7 +278,7 @@ And you’re right, but it’s important to realize that this is not at all obvi
     </div>
 
     <div class= "parallax_text">
-        In this light it’s really astonishing how successful reinforcement learning is, despite this huge problem of the combinatorial explosion and the lack of an accurate world model of the algorithms. How was this achieved?
+        In this light it’s astonishing how successful reinforcement learning is, despite this huge problem of the combinatorial explosion and the lack of an accurate world model of the algorithms. How was this achieved?
 
     </div>
 
@@ -287,9 +287,9 @@ And you’re right, but it’s important to realize that this is not at all obvi
 
     <div class= "parallax_text">
         Okay, so it would be great if our algorithm learned to recognize similar states, even if it never encountered the particular state it’s now in.
-        This is a big part of Reinforcement Learning, and it’s called
+        This is a big part of reinforcement learning, and it’s called
         <h3>function approximation</h3>
-        Imagine you have a function where you put in a state, and it gives back to you the true utility of that state. You could use it to calculate the utility of the next possible states that you can reach from the state you’re in, and you would then chose the action that brings you to the state with the highest utility. That function exists somewhere, even if we don’t know how it looks, and if we assume some regularity (meaning that there is a kind of pattern in the relationship between states and utility), knowing only a few points of the graph (tuples of parameters and utility) should tell us something about the rest of the graph. Of course, the more points we know, the better we can approximate the function.
+        Imagine you have a function where you put in a state, and it gives back to you the true utility of that state. You could use it to calculate the utility of the next possible states that you can reach from the state you’re in, and you would then choose the action that brings you to the state with the highest utility. That function exists somewhere, even if we don’t know how it looks, and if we assume some regularity (meaning that there is a kind of pattern in the relationship between states and utility), knowing only a few points of the graph (tuples of parameters and utility) should tell us something about the rest of the graph. Of course, the more points we know, the better we can approximate the function.
         
         <nav class="btn-bar nav-dark">
             <a class="btn btn-glass btn-warning" onclick="reveal(this)" class="expand_button" id="3">
@@ -334,7 +334,7 @@ And although NNs are very popular, they are not the only powerful form of functi
         <form>
             
             <fieldset>
-                <p>Which is another word for utility?</p>
+                <p>Which is another word for utility in the context of RL?</p>
 
                 <input type="checkbox" id="toggle-1">
                 
@@ -396,6 +396,8 @@ And although NNs are very popular, they are not the only powerful form of functi
                 <label for="toggle-2" class="checkanswer">Check answer</label>
             </fieldset>
 
+<!--       The following question asks for knowledge that isnt provided in the texts
+
             <fieldset>
                 <p>What is needed for Supervised Learning to work?</p>
 
@@ -421,7 +423,7 @@ And although NNs are very popular, they are not the only powerful form of functi
                 </label>
                 <p></p>
                 <label for="toggle-3" class="checkanswer">Check answer</label>
-            </fieldset>
+            </fieldset> -->
 
             <fieldset>
                 <p>Why is discounting of rewards not just helpful, but often necessary?</p>
