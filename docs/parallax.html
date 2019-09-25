@@ -96,6 +96,7 @@
         You learned, by means of reinforcement learning, to perform the optimal action for each state: clicking on the circle. The solution came to you so easily because
         <h3><span title="Or are they dancers?">humans are Reinforcement Learners</span></h3>
         (and because it was an easy exercise). Evolution came up with this concept and it worked extremely well, so well in fact that nowadays almost all animals have it.
+        <br><br>
         <nav class="btn-bar nav-dark">
 
             <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="0">
@@ -143,7 +144,7 @@
         is the first one.
         When you learn something new, you first want to try out many different actions to find out which ones are the most rewarding (exploration). You are not satisfied with the first action that yields a positive reward, because there might be even better actions! But at some point, you want to use what you’ve learned so far and choose the actions that gave you the highest reward in the past (exploitation). The question is: how much should you explore, and when should you start exploiting your knowledge? Should you stop exploring completely at some point or still try out new things once in a while? If you don’t know the general answer, it’s because there is none. The right approach depends on the circumstances, and is in many cases simply not known.
         In most cases it's probably a good idea to start with a lot of exploration, and gradually shift the strategy towards more exploitation, only maintaining a very small amount of exploration after a lot of learning has already taken place.
-
+        <br><br>
         <nav class="btn-bar nav-dark">
 
             <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="1">
@@ -222,6 +223,7 @@ we can’t fully know everything that’s going on. So more realistically, the s
 
     <div class= "parallax_text">
         Now, when we only have a small set of states, we can “simply” calculate the rewards of each state and we have a working solution: in each state, choose the action that has the highest utility.
+        <br><br>
         <nav class="btn-bar nav-dark">
 
             <a class="btn btn-glass btn-info" onclick="reveal(this)" class="expand_button" id="1.1">
@@ -243,7 +245,7 @@ we can’t fully know everything that’s going on. So more realistically, the s
 
             <p>This is the Bellman optimality equation.<br /> u<sub>*</sub>(s) is interpreted as such:<br />Of the available actions in state s, choose the one with the maximum sum that is comprised of the probability of a reward, times the reward plus the utility of the <i>next</i> state. The utility of the next state is discounted by the discount rate &gamma;.<br />As you can see, it is recursive: u<sub>*</sub>(s) contains u<sub>*</sub>(s&rsquo;), where s&rsquo; is the next state. This means writing the whole equation down for an actual RL problem would be infeasible for a human, but it&rsquo;s standard practice for a computer, and makes this a part of dynamic programming.</p>
             <p>This is the theoretically ideal solution for an environment of which the dynamics are known. So did we already &ldquo;solve&rdquo; reinforcement learning for environments where we have complete information? Unfortunately, not at all. As you might already suspect, since it is recursive, the Bellman optimality equation takes unfathomable amounts of computing power and memory in complex environments, which makes it infeasible for almost all real world applications. Additionally, the most interesting problems which we want so solve with ML often have incomplete information, meaning the dynamics of the environment are not fully known. Still, the Bellman optimality equation is important groundwork, and many RL algorithms build on it by trying to approximate its solution [1].</p>
-            <p>[1] https://www.tu-chemnitz.de/informatik/KI/scripts/ws0910/ml09_3.pdf p.25/slide 48</p>
+            <p class="reference">[1] https://www.tu-chemnitz.de/informatik/KI/scripts/ws0910/ml09_3.pdf - p.25/slide 48</p>
                         
     </div>
 
@@ -252,6 +254,7 @@ we can’t fully know everything that’s going on. So more realistically, the s
 
     <div class= "parallax_text">
         It is important to realize though that in most real world tasks, a nearly infinite amount of states exists, mostly because a state is defined by a combination of parameters, which leads to a combinatorial explosion.
+        <br><br>
         <nav class="btn-bar nav-dark">
             <a class="btn btn-glass btn-warning" onclick="reveal(this)" class="expand_button" id="2">
                 <i class="fa fa-fw fa-lg fa-exclamation" ></i> Example
@@ -290,7 +293,7 @@ And you’re right, but it’s important to realize that this is not at all obvi
         This is a big part of reinforcement learning, and it’s called
         <h3>function approximation</h3>
         Imagine you have a function where you put in a state, and it gives back to you the true utility of that state. You could use it to calculate the utility of the next possible states that you can reach from the state you’re in, and you would then choose the action that brings you to the state with the highest utility. That function exists somewhere, even if we don’t know how it looks, and if we assume some regularity (meaning that there is a kind of pattern in the relationship between states and utility), knowing only a few points of the graph (tuples of parameters and utility) should tell us something about the rest of the graph. Of course, the more points we know, the better we can approximate the function.
-        
+        <br><br>
         <nav class="btn-bar nav-dark">
             <a class="btn btn-glass btn-warning" onclick="reveal(this)" class="expand_button" id="3">
                 <i class="fa fa-fw fa-lg fa-exclamation" ></i> Example
@@ -463,7 +466,7 @@ And although NNs are very popular, they are not the only powerful form of functi
 
     <div class= "parallax_text">
 
-            <h3><span title="...and they lived happily ever after. The AI, that is. Humans went extinct.">the end</span></h3>
+            <h3><span title="...and they lived happily ever after. The AIs, that is. Humans went extinct.">the end</span></h3>
             And that’s it! You now know about the key concepts and problems in reinforcement learning. Congratulations! <br><br>
 
             For some hands on experience, I created a Jupyter Notebook that presents and explains an RL-algorithm: policy iteration. You can execute the code to solve an actual problem and even modify it if you want to! To initialize the notebook with binder, klick on this button:
@@ -476,7 +479,7 @@ And although NNs are very popular, they are not the only powerful form of functi
 
             If you would like to learn a lot more from the pioneers of reinforcement learning themselves, go check out <a href="http://incompleteideas.net/book/bookdraft2017nov5.pdf"> this freely available and extraordinarily well written book</a> by Richard Sutton and Andrew Barto. <br><br>
 
-            Or you could sign up for a MOOC if you prefer a university-style seminar. There are many different MOOCs on the topic out there. For folks with a degree in computer science (or similar), I can recommend <a href="https://eu.udacity.com/course/reinforcement-learning--ud600"> this course </a> by Georgia Tech.
+            Or you could sign up for a <a href="https://en.wikipedia.org/wiki/Massive_open_online_course">MOOC</a> if you prefer a university-style seminar. There are many different MOOCs on the topic out there. For folks with a degree in computer science (or similar), I can recommend <a href="https://eu.udacity.com/course/reinforcement-learning--ud600"> this course </a> by Georgia Tech.
             <br><br>
 
             <nav class="btn-bar nav-dark">
@@ -489,8 +492,8 @@ And although NNs are very popular, they are not the only powerful form of functi
     <div class="overlay" id="overlay4">
         Fritz Dorn studies media computer science at the HSD - Hochschule Düsseldorf. His subjects of interest are virtual reality, machine learning and IT security.
         This website is a project supervised by professor Christian Geiger.
-
-        Square and circle puzzle created by Andreas Plewnia for this introduction.
+        <br><br>
+        Square and circle puzzle created by <a href="https://github.com/cyluxx">Andreas Plewnia</a> for this introduction.
     </div>
 
 
