@@ -1,6 +1,6 @@
 # Reinforcement-Learning
 
-Source code for my website ["Quick Introduction To Reinforcement Learning"](https://favodar.github.io/Reinforcement-Learning/) and accompanying Jupyter Notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Favodar/Reinforcement-Learning/master?filepath=Jacks-Car-Rental%2FPolicyIterationNotebook.ipynb) and python code example for policy iteration. 
+Source code for the website ["Quick Introduction To Reinforcement Learning"](https://favodar.github.io/Reinforcement-Learning/) and accompanying Jupyter Notebook [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Favodar/Reinforcement-Learning/master?filepath=Jacks-Car-Rental%2FPolicyIterationNotebook.ipynb) and python code example for policy iteration. 
 
 The "docs" folder contains the html, css and js files for the [website](https://favodar.github.io/Reinforcement-Learning/) which is hosted via GitHub pages.
 
